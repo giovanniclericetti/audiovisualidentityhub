@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://audiovisualidentityhub.vercel.app/sitemap.xml

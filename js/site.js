@@ -1,3 +1,4 @@
+document.documentElement.classList.add('js');
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#site-nav');
 if (toggle && nav) {
@@ -14,6 +15,9 @@ if (toggle && nav) {
   document.addEventListener('click', event => {
     if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
   });
+  document.addEventListener('focusin', event => {
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+  });
   matchMedia('(min-width:768px)').addEventListener('change', event => {
     if (event.matches) closeMenu();
   });
@@ -25,7 +29,7 @@ if (toggle && nav) {
   });
 }
 for (const link of document.querySelectorAll('#site-nav a')) {
-  const path = location.pathname;
+  const path = location.pathname === '/' ? '/index.html' : location.pathname;
   const destination = new URL(link.href).pathname;
   const sameSection = ['/documentazione/', '/case-studies/'].some(section =>
     path.startsWith(section) && destination.startsWith(section));
@@ -101,6 +105,7 @@ if (archiveGrid) {
   const arrangeArchive = () => {
     const count = innerWidth >= 1536 ? 4 : innerWidth >= 1200 ? 3 : innerWidth >= 768 ? 2 : 1;
     if (count === previousColumns) return;
+    const focusedCard = archiveGrid.contains(document.activeElement) ? document.activeElement : null;
     previousColumns = count;
     const columns = Array.from({length:count}, () => {
       const column = document.createElement('div');
@@ -111,6 +116,7 @@ if (archiveGrid) {
     const mediumGroups = [0,0,0,0,1,1,1,1,2,2,2,1,0,2,2];
     archiveCards.forEach((card,index) => columns[count === 4 ? desktopGroups[index] : count === 3 ? mediumGroups[index] : count === 2 ? (index < 8 ? 0 : 1) : 0].append(card));
     archiveGrid.replaceChildren(...columns);
+    focusedCard?.focus({preventScroll:true});
   };
   arrangeArchive();
   window.addEventListener('resize', arrangeArchive);

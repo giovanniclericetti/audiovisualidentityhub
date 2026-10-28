@@ -1,0 +1,3 @@
+/* Loaded only when JavaScript is disabled; keep navigation available. */
+@media(max-width:767px){.site-header{position:relative;height:auto;min-height:80px;flex-wrap:wrap}.site-header nav{display:flex;position:static;flex:1 0 100%;box-shadow:none}.menu-toggle{display:none}}
+.studies-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(284px,100%),284px));justify-content:center}

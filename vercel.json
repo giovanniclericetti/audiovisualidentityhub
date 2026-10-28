@@ -2,5 +2,37 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "buildCommand": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/documentazione",
+      "destination": "/documentazione/1.1.html",
+      "permanent": true
+    },
+    {
+      "source": "/documentazione/",
+      "destination": "/documentazione/1.1.html",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies/intro-case-studies.html",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/",
+      "destination": "/case-studies/intro-case-studies.html",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/13-camera-cafe╠Ç.html",
+      "destination": "/case-studies/13-camera-cafe.html",
+      "permanent": true
+    }
+  ]
 }

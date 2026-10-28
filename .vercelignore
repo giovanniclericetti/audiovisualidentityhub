@@ -5,3 +5,6 @@ scripts/
 README.md
 page-inventory.json
 _downloads.html
+data/
+templates/
+AUDIT-REPORT.md
