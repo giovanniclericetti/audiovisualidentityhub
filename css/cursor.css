@@ -1,0 +1,9 @@
+/* Mouse-driven at any viewport width, including narrow preview panels. */
+.azure-cursor{position:fixed;inset:0 auto auto 0;pointer-events:none;z-index:2147483647;opacity:0;color:#20baff}
+.azure-cursor__dot{width:10px;height:10px;border-radius:50%;background:currentColor;margin:-5px}
+.azure-cursor__ring{width:42px;height:42px;margin:-21px;border:2px solid currentColor;border-radius:50%;box-sizing:border-box;transition:width .2s ease-out,height .2s ease-out,margin .2s ease-out,border-width .2s ease-out,background .2s ease-out}
+html.azure-cursor-active,html.azure-cursor-active *{cursor:none!important}
+.azure-cursor-active .azure-cursor{opacity:1}
+.azure-cursor__ring.is-link{width:120px;height:120px;margin:-60px;border-width:1.5px;background:rgb(32 186 255 / 6%)}
+.azure-cursor__ring.is-pressed{width:32px;height:32px;margin:-16px}
+@media(prefers-reduced-motion:reduce){.azure-cursor__ring{transition:none}}

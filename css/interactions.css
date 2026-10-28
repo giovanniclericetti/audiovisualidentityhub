@@ -1,0 +1,39 @@
+/* Shared interaction layer, loaded after the layout styles on every page. */
+.case-card:hover,.study-card:hover{transform:none}
+.brand-card:hover{filter:none}
+.case-card>.study-art,.study-card>.study-art,.brand-card>img,.case-card>img{
+  transform:scale(1);transform-origin:center;transition:transform .35s cubic-bezier(.2,.65,.3,1);
+}
+/* Scale the entire composition together, so overlaid marks stay aligned. */
+.study-card:hover .study-art img{transform:none}
+@media(hover:hover) and (pointer:fine){
+  .case-card:hover>.study-art,.study-card:hover>.study-art,.brand-card:hover>img,.case-card:hover>img{transform:scale(1.06)}
+  input,textarea,[contenteditable="true"]{cursor:text}
+  :disabled,[aria-disabled="true"]{cursor:not-allowed}
+}
+.case-card:focus-visible>.study-art,.study-card:focus-visible>.study-art,.brand-card:focus-visible>img{transform:scale(1.06)}
+.button,.footer-columns .footer-button,.reading-next,.case-navigation>a{border-width:1.4px}
+.button:active,.footer-button:active,.reading-next:active,.case-navigation>a:active{filter:none}
+@media(prefers-reduced-motion:reduce){
+  .case-card>.study-art,.study-card>.study-art,.brand-card>img,.case-card>img{transition:none}
+}
+
+/* Shared action geometry, including chapter continuation and case navigation. */
+:root body :is(.button,.reading-next,.case-navigation>a){
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  width:fit-content;max-width:100%;min-height:38px;padding:7px 10px;border:1.4px solid var(--blue);
+  border-radius:5px;color:var(--blue);background:transparent;text-decoration:none;
+  font-family:Lettera,Arial,sans-serif;font-size:18px;font-weight:500;
+  line-height:1.2;letter-spacing:-.03em;transition:background .2s,color .2s;
+}
+body .button.filled{background:var(--blue);color:white}
+:root body :is(.button,.reading-next,.case-navigation>a):is(:hover,:focus-visible){background:var(--blue);border-color:var(--blue);color:white}
+body .button.filled:hover{background:#0088c3;border-color:#0088c3}
+.site-header #site-nav a[aria-current]{color:var(--blue);text-decoration:none}
+@media(max-width:449px){:root body :is(.button,.reading-next,.case-navigation>a){font-size:16px}}
+/* Back navigation uses the reference's secondary grey treatment. */
+:root body .case-navigation>a:first-child{color:#9ca1aa;border-color:#9ca1aa}
+:root body .case-navigation>a:first-child:is(:hover,:focus-visible){color:white;background:#6d727b;border-color:#6d727b}
+:root body :is(.button,.reading-next,.case-navigation>a)>span{display:inline-flex;align-items:center;justify-content:center;flex:0 0 16px;width:16px;height:16px;font-size:22px;line-height:1}
+
+@media(min-width:1200px){:root body .case-navigation>a{min-height:39px}}
