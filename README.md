@@ -32,9 +32,9 @@ Le fasce dei marchi e dei casi studio scorrono in modo continuo anche al passagg
 Sito statico predisposto per Vercel, senza comando di build. Il repository GitHub conserva i sorgenti; la cartella `verification/` contiene verifiche locali e non viene pubblicata.
 
 Sito pubblico: https://audiovisualidentityhub.vercel.app
-Repository privato: https://github.com/giovanniclericetti/audiovisualidentityhub
+Repository pubblico: https://github.com/giovanniclericetti/audiovisualidentityhub
 
-La prima pubblicazione è stata eseguita direttamente dalla cartella locale. Il collegamento automatico tra GitHub e Vercel non è attivo: l’integrazione Vercel non ha accesso al nuovo repository privato. Per aggiornare la produzione dalla cartella del progetto:
+La prima pubblicazione è stata eseguita direttamente dalla cartella locale. Il collegamento automatico tra GitHub e Vercel non è attivo: la prima pubblicazione è avvenuta tramite CLI. Per aggiornare la produzione dalla cartella del progetto:
 
 ```sh
 vercel deploy --prod --scope team_L01cREHuCUQ967VesGEAGq7G
