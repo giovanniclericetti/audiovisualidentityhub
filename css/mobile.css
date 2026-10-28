@@ -123,3 +123,10 @@
   .chapter-pagination>a:only-child[rel=next]{margin-inline:auto}
   :root body :is(.button,.reading-next,.case-navigation>a){min-height:44px;text-align:center}
 }
+
+/* Full-width surfaces on the mobile homepage. */
+@media(max-width:767px){
+  .home .hero-panel,.home .research-section,.home .thesis-section{margin-inline:0;border-radius:0}
+  .home .intro-panel{width:100%;border-radius:0}
+  body:has(.home) .site-footer{border-radius:0}
+}
