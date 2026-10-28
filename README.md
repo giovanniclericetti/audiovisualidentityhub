@@ -20,6 +20,7 @@ Aprire http://localhost:8000. Dopo aver salvato una modifica, aggiornare la pagi
 - `case-studies/`: archivio e schede dei casi studio.
 - `css/site.css`: font, navigazione, homepage e componenti comuni.
 - `css/pages.css`: layout delle pagine interne.
+- `css/mobile.css`: adattamento fino a 767 px, caricato per ultimo per mantenere coerenti centrature, superfici e spaziature con il desktop.
 - `js/site.js`: menu mobile, fasce a ciclo continuo, immagini della ricerca e colonne responsive dell’archivio.
 - `assets/`: risorse originali locali.
 

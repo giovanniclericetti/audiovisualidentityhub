@@ -6,7 +6,7 @@ if (toggle && nav) {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     toggle.setAttribute('aria-expanded', String(open));
     nav.classList.toggle('open', open);
-    toggle.querySelector('span').textContent = open ? '−' : '+';
+    toggle.textContent = open ? 'Chiudi' : 'Menu';
   });
   const closeMenu = () => {
     if (toggle.getAttribute('aria-expanded') === 'true') toggle.click();

@@ -114,3 +114,9 @@ Non eseguiti: certificazione manuale completa con screen reader, prove su dispos
 - **Accessibilità:** semantica e comandi migliorati; contrasto ancora non conforme in alcuni elementi. Nessuna dichiarazione di piena conformità WCAG.
 - **SEO:** 100/100 nei sei campioni Lighthouse, metadati e sitemap presenti. Indicizzazione e redirect di hosting da verificare dopo pubblicazione.
 - **Pubblicazione:** modifiche disponibili localmente su http://localhost:8000; produzione non aggiornata in questo intervento.
+
+## Revisione mobile successiva
+
+Rivisto il layout fino a 767 px con `css/mobile.css`: menu senza simbolo + (Menu/Chiudi), titoli e CTA centrati, ritorni a capo naturali, pannelli e gradienti coerenti con il desktop, padding ripristinato nelle categorie e footer centrato. La home segue ora anche su mobile l’ordine desktop: introduzione, ricerca, Casi Studio, elaborato. I testi lunghi della documentazione e dei casi restano allineati a sinistra.
+
+Acquisite schermate prima/dopo per sei tipi di pagina a 390 px e controllate schermate mirate a 320 px. Ripetuti con esito positivo 342 scenari responsive (320–1920 px), 13 gruppi di interazioni, controlli statici, sintassi JavaScript e sincronizzazione dei contenuti condivisi. Nessun overflow rilevato a livello di pagina o singolo elemento. I dati Lighthouse precedenti non sono stati rimisurati per questa revisione.
