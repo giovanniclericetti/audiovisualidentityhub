@@ -140,3 +140,8 @@
   .study-gallery{padding-inline:20px}
   .site-footer{border-radius:0}
 }
+
+@media(max-width:767px){
+  .home .thesis-section{margin:0;border-radius:0;background:#e8f5fc}
+  .home{padding-bottom:0}
+}

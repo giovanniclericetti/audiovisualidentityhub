@@ -196,3 +196,9 @@ summary:focus-visible{outline:3px solid #005377;outline-offset:5px}
 
 /* Use the site accent for native text selection. */
 ::selection{background:var(--blue);color:#fff}
+
+/* Research thesis: one continuous, full-width pale-blue surface. */
+.home .thesis-section{background:#e8f5fc;border-radius:0;margin:0}
+.home .thesis-cover::before{display:none}
+.home{padding-bottom:0}
+@media(min-width:1200px){.home .thesis-section{margin-inline:-50px}}
