@@ -21,7 +21,7 @@ Aprire http://localhost:8000. Dopo aver salvato una modifica, aggiornare la pagi
 - `css/site.css`: font, navigazione, homepage e componenti comuni.
 - `css/pages.css`: layout delle pagine interne.
 - `css/mobile.css`: adattamento fino a 767 px, caricato per ultimo per mantenere coerenti centrature, superfici e spaziature con il desktop.
-- `js/site.js`: menu mobile, fasce a ciclo continuo, immagini della ricerca e colonne responsive dell’archivio.
+- `js/site.js`: navigazione diretta, fasce a ciclo continuo, immagini della ricerca e navigazione dei capitoli.
 - `assets/`: risorse originali locali.
 
 I video incorporati nelle schede utilizzano i player YouTube originali e richiedono una connessione. I collegamenti email aprono il programma di posta. La ricostruzione conserva contenuti e risorse del riferimento; la corrispondenza visiva su ogni viewport va verificata prima della pubblicazione.
@@ -67,4 +67,8 @@ I test browser utilizzano Google Chrome tramite Playwright; `AIH_BROWSER_CHANNEL
 
 Gli esiti e gli screenshot sono salvati in `verification/audit/`, esclusa da Git e dalla pubblicazione. Le immagini originali sono conservate in `assets/media/`; `assets/optimized/` contiene le copie WebP senza perdita e le varianti responsive. Non cancellare gli originali: restano le sorgenti dell’archivio visivo.
 
+La cattura degli screenshot non modifica gli asset pubblicati. Il controllo responsive fallisce anche per overflow dei singoli elementi e caricamenti locali errati; quello statico controlla srcset e metadati. Nelle fasce animate il focus da tastiera rende le card stabili e scorribili. Per immagini ritagliate con `object-fit: cover`, calcolare `sizes` sulla dimensione dell’immagine prima del ritaglio, per conservare la nitidezza.
+
 `AUDIT-REPORT.md` descrive le correzioni, le misurazioni e i punti editoriali o di accessibilità ancora aperti. Le etichette Company/Design/Branding descrivono la tassonomia: non sono controlli di filtro.
+
+La navbar flottante è definita in `css/floating-nav.css`, con i link diretti sempre visibili e senza pulsante Menu. L’archivio presenta un’intestazione e una griglia editoriale in `css/studies-magazine.css`, con bordo esterno arrotondato. Ogni cella contiene immagine, titolo su due righe e descrizione; tutta la cella è un link. Tutti i 15 casi restano accessibili senza JavaScript. `js/cursor.js` aggiunge una breve scia di pixel azzurri al puntatore nativo, disattivata su touch e con movimento ridotto.

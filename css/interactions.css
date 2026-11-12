@@ -1,4 +1,9 @@
 /* Shared interaction layer, loaded after the layout styles on every page. */
+/* Keyboard users need the original cards in a stable, scrollable row. */
+.is-loop:focus-within{overflow-x:auto!important;mask-image:none!important}
+.is-loop:focus-within .loop-track{animation:none;transform:none}
+.is-loop:focus-within .loop-track>[aria-hidden="true"]{display:none}
+summary:focus-visible{outline:3px solid #005377;outline-offset:5px}
 .case-card:hover,.study-card:hover{transform:none}
 .brand-card:hover{filter:none}
 .case-card>.study-art,.study-card>.study-art,.brand-card>img,.case-card>img{

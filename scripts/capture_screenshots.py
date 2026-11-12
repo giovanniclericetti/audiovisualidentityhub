@@ -22,8 +22,6 @@ with sync_playwright() as p:
      page.wait_for_timeout(150)
      page.screenshot(path=str(dest/(path.replace('/','-')+f'-{width}-{position}.png')))
     page.evaluate('window.scrollTo(0,0)')
- page.set_viewport_size({'width':1200,'height':630})
- page.goto('http://127.0.0.1:8000/index.html');page.locator('img').evaluate_all('(xs)=>xs.forEach(x=>x.loading="eager")');page.evaluate('document.fonts.ready');page.evaluate('Promise.all([...document.images].map(img => img.decode().catch(() => null)))')
- page.screenshot(path=str(root/'assets/social-preview.png'))
+ # Audits must never overwrite a published asset.
  print('Screenshots',len(paths)*3,flush=True)
  browser.close()

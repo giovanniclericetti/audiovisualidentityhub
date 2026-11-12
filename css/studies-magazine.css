@@ -1,0 +1,25 @@
+/* Editorial archive grid, scoped independently of the rest of the site. */
+.studies-index--magazine{padding-top:136px}
+.study-gallery--magazine{max-width:1436px;margin-inline:auto;padding-top:0;--archive-line:#bcc9d1}
+.study-gallery--magazine .archive-heading{max-width:850px;margin:0 auto 48px;text-align:center}
+.archive-heading h1{font-size:clamp(36px,4vw,48px);line-height:1.1;letter-spacing:-.04em;margin:0 0 24px}
+.archive-heading h1 em{font-style:normal;color:var(--blue)}
+.study-gallery--magazine .archive-heading p{font-size:20px;line-height:1.4;letter-spacing:-.02em;margin:0;color:var(--muted)}
+.study-gallery--magazine .studies-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;align-items:stretch;justify-content:stretch;gap:1px;margin:0 0 40px;max-width:none;border:1px solid var(--archive-line);border-radius:36px;overflow:hidden;background:var(--archive-line)}
+.study-gallery--magazine .study-card{display:flex;flex-direction:column;position:relative;gap:0;min-width:0;width:auto;aspect-ratio:auto;border-radius:0;background:#fff;color:var(--ink);padding:30px;border:0;overflow:hidden;transition:background .2s}
+.study-gallery--magazine .study-card::after{display:none}
+.study-gallery--magazine .study-card:hover{transform:none;background:#f8fcfe}
+.archive-card-image{display:block;position:relative;overflow:hidden;border-radius:18px;aspect-ratio:3/2;background:#eaf0f4;margin-bottom:24px}
+.study-gallery--magazine .archive-card-image img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transform:scale(var(--archive-image-scale,1));transition:transform .35s ease}
+.study-gallery--magazine .study-card[data-study="7-rebrandingrai"]{--archive-image-scale:1.08}
+.study-gallery--magazine .study-card h3{position:static;font-family:Lettera,Arial,sans-serif;font-size:24px;line-height:1.2;height:2.4em;flex:none;letter-spacing:-.03em;font-weight:500;margin:0 0 12px}
+.archive-title-line{display:block;white-space:nowrap}
+.archive-card-description{font-size:16px;line-height:1.5;letter-spacing:-.015em;color:#535862;margin:0;flex:1;min-height:3em;text-wrap:balance}
+.study-gallery--magazine .study-card:focus-visible{outline:3px solid #0076a8;outline-offset:-4px}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.study-gallery--magazine .study-card:hover .archive-card-image img{transform:scale(calc(var(--archive-image-scale,1) + .025))}}
+@media(min-width:640px) and (max-width:1099px){.study-gallery--magazine .studies-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.study-gallery--magazine .studies-grid::after{content:"";background:#fff}}
+@media(max-width:1199px){.study-gallery--magazine .study-card h3{font-size:22px}}
+@media(max-width:767px){.studies-index--magazine{padding-top:128px}.study-gallery--magazine .archive-heading{margin-bottom:32px}.study-gallery--magazine .archive-heading p{font-size:17px;line-height:1.55}.study-gallery--magazine .studies-grid{border-radius:24px}.study-gallery--magazine .study-card{padding:24px}.archive-card-image{margin-bottom:20px}}
+@media(max-width:639px){.study-gallery--magazine .studies-grid{grid-template-columns:1fr}}
+@media(max-width:389px){.study-gallery--magazine .study-card{padding:20px}.study-gallery--magazine .study-card h3{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.study-gallery--magazine .study-card,.study-gallery--magazine .archive-card-image img{transition:none}}

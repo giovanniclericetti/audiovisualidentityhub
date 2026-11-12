@@ -42,6 +42,14 @@ for (const link of document.querySelectorAll('#site-nav a')) {
 // Duplicate complete groups and measure the exact repeat distance on resize.
 function continuousStrip(viewport, track, group, speed) {
   const originals = [...group.children];
+  viewport.addEventListener('focusin', event => {
+    if (event.target.closest('a,button')) {
+      event.target.scrollIntoView({block:'nearest', inline:'nearest', behavior:'instant'});
+    }
+  });
+  viewport.addEventListener('focusout', event => {
+    if (!viewport.contains(event.relatedTarget)) viewport.scrollLeft = 0;
+  });
   const clone = node => {
     const copy = node.cloneNode(true);
     copy.setAttribute('aria-hidden', 'true');
@@ -96,30 +104,6 @@ if (chapterMenu) {
   const syncChapters = () => { chapterMenu.open = !mobileChapters.matches; };
   syncChapters();
   mobileChapters.addEventListener('change', syncChapters);
-}
-// Keep the archive's editorial column order without duplicating cards or links.
-const archiveGrid = document.querySelector('.studies-grid');
-if (archiveGrid) {
-  const archiveCards = [...archiveGrid.querySelectorAll('.study-card')];
-  let previousColumns = 0;
-  const arrangeArchive = () => {
-    const count = innerWidth >= 1536 ? 4 : innerWidth >= 1200 ? 3 : innerWidth >= 768 ? 2 : 1;
-    if (count === previousColumns) return;
-    const focusedCard = archiveGrid.contains(document.activeElement) ? document.activeElement : null;
-    previousColumns = count;
-    const columns = Array.from({length:count}, () => {
-      const column = document.createElement('div');
-      column.className = 'study-column';
-      return column;
-    });
-    const desktopGroups = [0,0,0,0,1,1,1,1,2,2,2,2,3,3,3];
-    const mediumGroups = [0,0,0,0,1,1,1,1,2,2,2,1,0,2,2];
-    archiveCards.forEach((card,index) => columns[count === 4 ? desktopGroups[index] : count === 3 ? mediumGroups[index] : count === 2 ? (index < 8 ? 0 : 1) : 0].append(card));
-    archiveGrid.replaceChildren(...columns);
-    focusedCard?.focus({preventScroll:true});
-  };
-  arrangeArchive();
-  window.addEventListener('resize', arrangeArchive);
 }
 // Testimonials form a continuous strip, like the moving brand galleries.
 const testimonials = document.querySelector('.testimonials-grid');

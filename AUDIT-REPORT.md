@@ -1,3 +1,110 @@
+# Audiovisual Identity Hub — revisione del 12 novembre 2026
+
+Intervento sulla copia locale del repository. Nessun deploy o push eseguito. Il rapporto del 28 ottobre, conservato più sotto, documenta interventi precedenti: i suoi risultati non vanno confusi con i test di questa revisione.
+
+## A. Problemi individuati
+
+| Problema verificato | Gravità | File |
+| --- | --- | --- |
+| Card delle fasce animate parzialmente fuori schermo quando ricevono il focus da tastiera | Alta | `js/site.js`, `css/interactions.css` |
+| Refusi, concordanze e sintassi ancora da correggere | Media | Capitoli 1.2–1.6 e 3.4 |
+| Didascalia e testo alternativo «Descrizione Video» privi di significato | Media | `documentazione/1.8.html` |
+| Parola Netflix divisa da uno span ridondante, con colore inline | Bassa | `case-studies/10-personalizzazione-delle-thumbnail-netflix.html` |
+| Due link Flopicco non più disponibili | Media | `documentazione/biblio.html`, `case-studies/3-lol.html` |
+| Immagini grandi senza scelta di risoluzione per schermi piccoli | Media | Capitolo 1.1 e Disney+ |
+| Il test responsive registrava overflow dei singoli elementi senza far fallire il controllo; risposte HTTP errate non controllate | Media | `scripts/check_browser.py` |
+| Lo script screenshot modificava l’asset social del sito durante l’audit | Media | `scripts/capture_screenshots.py` |
+| Contrasto dei colori originali insufficiente in più componenti | Alta, aperta | CSS condivisi |
+
+## B. Modifiche effettuate
+
+### Contenuti
+
+Corretti errori certi, fra cui «accompagne», «le si riprende», «con gli insegnanti si rivolgevano», «formazione li», «tutt’ora», «alla esigenze», «rappresentative», «acquisto Italia 1», «altre emittente», «Il Individual Brand», «Striscia la Notiza», «elemento principali». Sistemate la parentesi di La5 e la concordanza del passaggio sulle reti locali. Nessuna riscrittura di capitoli o modifica delle date storiche.
+
+Nel capitolo 1.8, dopo aver osservato l’immagine, il placeholder è stato sostituito con «Composizione grafica dei bumper di Rai Storia», sia nella didascalia sia nell’alt. Nella scheda Netflix è stato eliminato lo span che spezzava la parola: non si trattava di uno spazio effettivamente visibile, ma di frammentazione del testo nel markup.
+
+Verificate le correzioni già presenti: email ufficiale e mailto, Pajè 2024 nel passaggio richiesto, Disney+ 2024, Casi Studio, TV e Video Identity nei testi editoriali, IDENTITÀ, copyright 2025. Le varianti presenti nei titoli bibliografici e nelle citazioni letterali sono preservate. I crediti di Rai Yoyo restano completi.
+
+Recuperati e verificati con risposta GET 200:
+
+- Portfolio: [Flopicco — Our Work](https://flopicco.com/our-work/).
+- Progetto LOL: [Flopicco — Chi ride è fuori Toolkit](https://flopicco.com/chi-ride-e-fuori/).
+
+La cronologia Disney+ già corretta è confermata dal [comunicato Disney del 27 marzo 2024](https://press.disneyplus.com/hulu-on-disney-plus-launches-today-in-the-us-for-bundle-subscribers), che associa il lancio di Hulu negli Stati Uniti all’aggiornamento del marchio.
+
+### Interazioni e manutenzione
+
+Durante il focus le fasce di card diventano righe stabili e scorribili, il collegamento attivo viene portato in vista e lo scorrimento viene azzerato all’uscita. Il comportamento animato ordinario resta invariato. Aggiunto un focus esplicito al controllo dell’indice. Nessuna modifica a palette, famiglie tipografiche, categorie, classificazioni o composizione ordinaria.
+
+Aggiornati i parametri di versione di `site.js` e `interactions.css` negli HTML, per evitare che una futura pubblicazione usi copie in cache. Menu, footer, indice e paginazione condivisi risultano sincronizzati: non era necessario ricostruirli.
+
+I test ora rilevano come errori anche overflow dei singoli elementi, H1 inattesi e caricamenti locali falliti. Il controllo statico verifica anche srcset, canonical, metadati social, email e titoli duplicati. La cattura degli screenshot scrive soltanto nell’archivio di verifica.
+
+### Media
+
+Aggiunte quattro varianti WebP a 640/960 px per due immagini, mantenendo gli originali nel srcset come risoluzione massima e nel src come fallback. Compressione senza perdita rispetto ai pixel ridimensionati con Lanczos, verificata tramite confronto pixel; il ridimensionamento non è equivalente alla conservazione di ogni dettaglio dell’originale.
+
+| Immagine | Originale | 640 px | 960 px |
+| --- | ---: | ---: | ---: |
+| Famiglia con televisore, capitolo 1.1 | 538.932 B | 186.386 B | 390.284 B |
+| Catalogo Disney+ | 472.212 B | 131.994 B | 271.294 B |
+
+Il `sizes` di Disney+ tiene conto dell’ingrandimento necessario per il ritaglio originale: alle larghezze mobile testate con DPR 1 viene scelta la variante 960, da tablet in su l’originale. Non sono stati modificati crop, immagini originali, video o font.
+
+## C. Test della revisione corrente
+
+- **Responsive:** 38 pagine × 9 larghezze (320, 375, 390, 430, 768, 1024, 1280, 1440, 1920) = **342 scenari superati**. Nessun overflow pagina/elemento, immagine locale rotta, H1 inatteso, errore JavaScript o caricamento locale fallito. Verifica aggiuntiva di Disney+ alle nove larghezze dopo l’adeguamento del srcset.
+- **Interazioni:** **14 gruppi superati**, inclusi menu, Escape, click esterno, uscita del focus, cambio breakpoint, touch, precedente/successivo, 15 card archivio, mailto, movimento ridotto, assenza JavaScript e visibilità delle card al focus.
+- **Accessibilità automatica:** axe-core su **76 combinazioni** (38 pagine a 390 e 1440 px). Restano violazioni `color-contrast` in tutte le combinazioni. Nessun’altra regola violata rilevata dalla configurazione WCAG A/AA adottata; non è una certificazione completa.
+- **HTML:** 40 file passano HTML Validate con la configurazione adottata. Escluse regole stilistiche `void-style`, `no-inline-style`, `attr-quotes`, `doctype-style`, `no-trailing-whitespace`, `long-title`, `prefer-native-element`, `wcag/h32`.
+- **Statici:** percorsi, anchor, ID, alt/dimensioni immagini, srcset, email, metadati e titoli passano. `sync_shared.py --check`, `node --check` per entrambi gli script e `git diff --check` passano. Nessun riferimento runtime a Framer trovato negli HTML/CSS/JS.
+- **Integrità:** confronto con HEAD su 40 HTML: testi dei blockquote, URL degli iframe e paragrafi contenenti Farnsworth/Giorgio VI invariati.
+- **Screenshot:** 114 schermate a pagina intera prima e dopo (38 × 3 viewport), più 18 catture di sezioni per fase. Confronto automatizzato delle 132 coppie; 90 identiche pixel per pixel. Le differenze includono correzioni testuali, immagini responsive e variazioni di rasterizzazione. Le quattro variazioni di altezza riguardano righe dei capitoli 1.2/1.6 e della bibliografia. Revisione visiva di panoramiche e dettagli rappresentativi desktop/tablet/mobile; nessun redesign o sovrapposizione osservato nei campioni.
+- **Link esterni:** 106 URL controllati via HEAD: 83 risposte 200, 8 risposte 403, 6 risposte 404, 6 risposte 401, 2 risposte 405, 1 risposta 503. Due dei sei 404 sono stati sostituiti con URL Flopicco verificati anche via GET. I quattro 404 rimasti sono elencati sotto. 401/403/405 non dimostrano indisponibilità per gli utenti.
+- **Sito pubblico:** `index.html` risponde HTTP 200 da Vercel. Questo non verifica una pubblicazione delle modifiche locali, che non è stata eseguita.
+
+### Lighthouse mobile locale
+
+Sei esecuzioni sequenziali su Chrome, throttling simulato, server HTTP Python locale, player YouTube/Vimeo esclusi. Disney+ rimisurato dopo il srcset finale. Valori di laboratorio; nessun confronto quantitativo controllato prima/dopo con l’audit di ottobre.
+
+| Pagina | Performance | Accessibilità | Best practices | SEO | LCP | CLS | TBT |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Home | 91 | 95 | 100 | 100 | 3.46 s | 0.00000 | 0 ms |
+| About | 92 | 96 | 100 | 100 | 3.15 s | 0.00339 | 0 ms |
+| Capitolo 1.1 | 79 | 95 | 100 | 100 | 5.25 s | 0.00000 | 0 ms |
+| Bibliografia | 92 | 95 | 100 | 100 | 3.01 s | 0.00025 | 0 ms |
+| Archivio Casi Studio | 92 | 95 | 100 | 100 | 3.08 s | 0.00000 | 0 ms |
+| Disney+ | 79 | 96 | 96 | 100 | 5.56 s | 0.00000 | 0 ms |
+
+**INP non misurato.** TBT non lo sostituisce. Gli esiti grezzi, le immagini e i confronti sono in `verification/audit/`, esclusa dalla pubblicazione.
+
+## D. Problemi ancora aperti
+
+1. **Contrasto.** L’azzurro originale su bianco misura circa 2,97:1; alcune etichette, pulsanti e testi secondari non raggiungono le soglie AA. Il vincolo esplicito sui colori è stato rispettato; non è possibile dichiarare piena conformità.
+2. **Movimento.** Restano fasce automatiche senza comando persistente di pausa. Il precedente rapporto documenta la rimozione richiesta dei pulsanti; sono mantenuti movimento ridotto e pausa al focus, che non equivalgono da soli a soddisfare ogni requisito WCAG sulla pausa.
+3. **Fonti incomplete e attribuzioni.** Restano le pagine mancanti di Grasso (1996), fonti generiche e discrepanze elencate nell’audit storico. Nuova evidenza: lo stesso passaggio sull’intelligenza artificiale compare attribuito a Tolino nel capitolo 1.8 e a Pajè nel 2.1; serve confronto con le interviste originali. Nel capitolo 1.2 l’attribuzione «Colombo, 1953» va riconciliata con il racconto del 3 gennaio 1954. Citazioni e attribuzioni non sono state alterate.
+4. **Quattro link 404 residui:** intervista Motiongraphics/Pajè; Channel 4 Idents 2023 su 4Creative; TG1 16/02/2025 su RaiPlay; articolo Panorama Audiovisual sulla Kings League. Per quest’ultimo le versioni spagnola e inglese sono ancora indicizzate, ma anche quelle restituiscono 404 via GET: conservato il riferimento originale, senza dichiararlo riparato. Amazon/RaiPlay ha restituito 503 e richiede controllo manuale.
+5. **Cronologie storiche.** Restano i casi già segnalati nell’audit precedente. Per LOL, la pagina dello studio recuperata conferma il 2021; il passaggio «2001» è segnalato per la revisione accademica, senza modificare autonomamente la cronologia richiesta come protetta da verifica editoriale.
+6. **Categorie.** Sono etichette tassonomiche, non controlli di filtro implementati. Non è stata inventata una corrispondenza fra categorie e schede.
+7. **Limiti dei test.** Non eseguiti screen reader manuale completo, dispositivi fisici, Safari/Firefox, riproduzione e sottotitoli dei player, dati sul campo di INP/LCP, nuova pubblicazione e verifica di tutti i redirect della produzione. I test browser bloccano le richieste esterne per isolare il sito.
+
+## E. Stato finale
+
+| Area | Stato |
+| --- | --- |
+| Build/codice | Statico, nessuna build necessaria; sintassi e controlli adottati superati |
+| Responsive | 342 scenari Chrome superati; confronto visivo eseguito |
+| Navigazione | Menu e paginazione verificati; corretto focus nelle fasce |
+| Performance | Media responsive aggiunti; LCP ancora da migliorare, INP non misurato |
+| Accessibilità | Problema di focus risolto; contrasto e pausa persistente restano aperti |
+| SEO | Metadati/canonical/sitemap verificati; Lighthouse SEO 100 nei sei campioni |
+| Pubblicazione | Modifiche locali, produzione non aggiornata |
+
+---
+
+# Archivio: audit del 28 ottobre 2026
+
 # Audiovisual Identity Hub — rapporto di audit
 
 Data: 28 ottobre 2026. Modifiche applicate alla copia locale; nessun aggiornamento della produzione eseguito in questo intervento. Anteprima: http://localhost:8000.
